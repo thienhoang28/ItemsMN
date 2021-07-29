@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Add or Edit Items</title>
+
+	<link rel="stylesheet" type="text/css" th:href="@{/lib/css/bootstrap.min.css}">
+	<script type="text/javascript" th:src="@{/lib/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/lib/js/popper.min.js}"></script>
+	<script type="text/javascript" th:src="@{/lib/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/lib/js/all.min.js}"></script>
+
+	<link rel="stylesheet" type="text/css" th:href="@{/styles/additem.css}">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  	<!-- <a class="navbar-brand" href="#">Navbar</a> -->
+	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    	<span class="navbar-toggler-icon"></span>
+	  	</button>
+
+	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    	<ul class="navbar-nav mr-auto">
+	      		<li class="nav-item">
+	        		<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	      		</li>
+	      		<li class="nav-item">
+	        		<a class="nav-link" href="#">List</a>
+	      		</li>
+	      		<li class="nav-item">
+	        		<a class="nav-link" href="#">Inspec</a>
+	      		</li>
+		      	<li class="nav-item dropdown">
+		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          		Require
+		        	</a>
+			        <div class="dropdown-menu dropmenu" aria-labelledby="navbarDropdown">
+			          	<a class="dropdown-item" href="#">Supply New</a>
+			          	<a class="dropdown-item" href="#">Return</a>
+			          	<a class="dropdown-item" href="#">Broken</a>
+			        </div>
+		      	</li>
+		      	<li class="nav-item">
+		      		<a class="nav-link" href="#">Import</a>
+		      	</li>
+		      	<li class="nav-item">
+		      		<a class="nav-link" href="#">Handover</a>
+		      	</li>
+		      	<li class="nav-item">
+		      		<a class="nav-link" href="#">Maintenance</a>
+		      	</li>
+		      	<!--<li class="nav-item">
+		      		<a class="nav-link" href="#">Liquidation</a>
+		      	</li> -->
+	    	</ul>
+	  	</div>
+	</nav>
+	<div id="header">
+		<img id="logo" th:src="@{/img/3slogo.png}">
+		<h3 id="hdtext">3S Management Items</h3>
+	</div>
+
+	<div class="container-fluid">
+		<div id="title_page" th:if="${item.ID_Item == null}"><h4>Add Items</h4></div>
+		<div id="title_page" th:if="${#httpServletRequest.requestURI.toString().contains('item/edit')}"><h4>Edit Item</h4></div>
+		<div id="title_page" th:if="${#httpServletRequest.requestURI.toString().contains('item/detail')}"><h4>Details Item</h4></div>
+		<div class="row">
+			<div class="col-md-6 col-sm-12 mr-auto ml-auto">
+		<form th:action="@{/item/save}" th:object="${item}" method="post">
+			<input type="hidden" th:field="*{ID_Item}" th:value="${item.ID_Item}"/>
+			<div>
+				<div class="form-group row">
+					<label class="col-form-label text-right font-weight-bold col-sm-4">Name Item:</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{Name_Item}" class="form-control" required/>
+					</div>
+				</div>
+				
+				<!-- <div class="form-group row">
+					<label class="col-form-label col-sm-4">:</label>
+					<div class="col-sm-8">
+						<input type="number" th:field="*{price}" class="form-control" required/>
+					</div>
+				</div> -->
+				
+				<div class="form-group row">
+					<label class="col-form-label text-right font-weight-bold col-sm-4">Type Items:</label>
+					<div class="col-sm-8">
+						<select th:field="*{typeitem}" class="form-control" required>
+							<th:block th:each="type : ${listTypeItems}">
+								<option th:text="${type.Name_Type}" th:value="${type.ID_Type_Item}"></option>	
+							</th:block>
+						</select>
+					</div>
+				</div>
+				
+				<th:block th:unless="${item.ID_Item == null}" th:each="specificat, status: ${item.speci}">
+					<input type="hidden" name="speciID" th:value="${specificat.ID_Specification}" />
+					<div class="form-group row">
+						<label class="col-form-label text-right font-weight-bold col-sm-4">Specification [[${status.count}]]:</label>
+						<div class="col-sm-4">
+							<input type="text" name="speciName" th:value="${specificat.Name}" class="form-control" />
+						</div>
+						<div class="col-sm-4">
+							<input type="text" name="speciValue" th:value="${specificat.Value}" class="form-control" />
+						</div>
+					</div>
+				</th:block>
+				
+				<th:block th:if="${item.ID_Item == null}">
+					<div class="form-group row">
+						<label class="col-form-label text-right font-weight-bold col-sm-4">Specification 1:</label>
+						<div class="col-sm-4">
+							<input type="text" name="speciName" placeholder="Name" class="form-control"/>
+						</div>
+						<div class="col-sm-4">
+							<input type="text" name="speciValue" placeholder="Value" class="form-control"/>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label class="col-form-label text-right font-weight-bold col-sm-4">Specification 2:</label>
+						<div class="col-sm-4">
+							<input type="text" name="speciName" placeholder="Name" class="form-control"/>
+						</div>
+						<div class="col-sm-4">
+							<input type="text" name="speciValue" placeholder="Value" class="form-control" />
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label class="col-form-label text-right font-weight-bold col-sm-4">Specification 3:</label>
+						<div class="col-sm-4">
+							<input type="text" name="speciName" placeholder="Name" class="form-control" />
+						</div>
+						<div class="col-sm-4">
+							<input type="text" name="speciValue" placeholder="Value" class="form-control" />
+						</div>
+					</div>
+				</th:block>
+
+				<div class="form-group row">
+					<label class="col-form-label text-right font-weight-bold col-sm-4">Unit:</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{Unit}" class="form-control" required/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-form-label text-right font-weight-bold col-sm-4">Warranty Period:</label>
+					<div class="col-sm-8">
+						<input type="number" th:field="*{Warranty_Period}" class="form-control" required/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-form-label text-right font-weight-bold col-sm-4">Warranty Unit:</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{Warranty_Unit}" class="form-control" required/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-form-label text-right font-weight-bold col-sm-4">New/Broken:</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{New_Broken}" class="form-control" required/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-form-label text-right font-weight-bold col-sm-4">Status:</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{Status}" class="form-control" required/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-form-label text-right font-weight-bold col-sm-4">Branch:</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{location.Branch}" class="form-control" required/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-form-label text-right font-weight-bold col-sm-4">Address:</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{location.Address}" class="form-control" required/>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<label class="col-form-label text-right font-weight-bold col-sm-4">Floor:</label>
+					<div class="col-sm-8">
+						<input type="text" th:field="*{location.Floor}" class="form-control" required/>
+					</div>
+				</div>
+
+				<div class="btnsave text-right">
+					<button th:if="${#httpServletRequest.requestURI.toString().contains('item/edit') || 
+					                 #httpServletRequest.requestURI.toString().contains('item/additem')}" type="submit" class="btn btn-primary">Save</button>
+				</div>
+			</div>
+		</form>
+		</div>
+		</div>
+	</div>
+
+	
+	
+</body>
+</html>

@@ -1,0 +1,71 @@
+*,body {
+	padding: 0;
+	margin: 0;
+}
+
+#header {
+	min-height: 4em;
+	line-height: 4em;
+	background-color: #05131e;
+	margin: auto;
+	padding-left: 1em;
+
+}
+
+#header #logo {
+	width: 30px;
+	height: 30px;
+}
+
+#header #hdtext {
+	font-family: "Roboto", helvetica, arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+	display: inline;
+	color: white;
+	
+}
+
+.navbar {
+	padding: 0 18px;
+}
+
+.navbar .navbar-toggler {
+	padding: 0 4px;
+	margin-left: auto;
+}
+
+.dropdown .dropmenu {
+	background-color: #343a40;
+	
+}
+
+.dropdown .dropmenu .dropdown-item {
+	color: rgba(255,255,255,0.5);
+}
+
+.dropdown .dropmenu .dropdown-item:hover {
+	background-color: transparent;
+	color: white;
+}
+
+.dropdown .dropmenu .dropdown-item:active {
+	background-color: transparent;
+	color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:active {
+	color: white;
+}
+
+#title_page {
+	margin-top: 10px;
+}
+
+.btnsave {
+	margin-bottom: 5rem;
+}

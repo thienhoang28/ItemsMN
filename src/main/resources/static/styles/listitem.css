@@ -1,0 +1,148 @@
+*,body {
+	padding: 0;
+	margin: 0;
+}
+
+#header {
+	min-height: 4em;
+	line-height: 4em;
+	background-color: #05131e;
+	margin: auto;
+	padding-left: 1em;
+
+}
+
+#header #logo {
+	width: 30px;
+	height: 30px;
+}
+
+#header #hdtext {
+	font-family: "Roboto", helvetica, arial, sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+	display: inline;
+	color: white;
+	
+}
+
+.navbar {
+	padding: 0 18px;
+}
+
+.navbar .navbar-toggler {
+	padding: 0 4px;
+	margin-left: auto;
+}
+
+.dropdown .dropmenu {
+	background-color: #343a40;
+	
+}
+
+.dropdown .dropmenu .dropdown-item {
+	color: rgba(255,255,255,0.5);
+}
+
+.dropdown .dropmenu .dropdown-item:hover {
+	background-color: transparent;
+	color: white;
+}
+
+.dropdown .dropmenu .dropdown-item:active {
+	background-color: transparent;
+	color: white;
+}
+
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:active {
+	color: white;
+}
+
+#title_page {
+	margin-top: 10px;
+}
+
+#filter .fildiv {
+	margin-left: 5px;
+	margin-bottom: 10px;
+}
+
+#filter .fil {
+	display: inline;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.rhead th, .rbody td {
+	padding: 0.375rem 0.625rem;
+	font-size: 14px;
+}
+
+.rhead #thid {
+	width: 5%;
+}
+
+.rhead #thname {
+	width: 10%;
+}
+
+.rhead #thspec {
+	width: 55%;
+}
+
+.rhead #thstatus {
+	width: 10%;
+}
+
+.rhead #thact {
+	width: 15%;
+}
+
+.panel-default {
+    border-color: #ddd;
+}
+
+.panel {
+    margin-bottom: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.panel-body {
+	padding: 10px;
+}
+
+.filter-col{
+	margin-top: 5px;
+	margin-bottom: 5px;
+    padding-left:10px;
+    padding-right:10px;
+}
+
+.form-control {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 10px;
+}
+
+.btnadd .addnew {
+	font-size: 14px;
+}
+
+.fildiv .fil {
+	text-align: left;
+	display: inline;
+	float: left;
+}
+
+.fildiv .addnew {
+	text-align: right !important;
+	display: inline;
+	float: right;
+	margin-right: 5px;
+}

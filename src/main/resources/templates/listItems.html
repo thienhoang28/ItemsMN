@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>List Items</title>
+
+	<link rel="stylesheet" type="text/css" th:href="@{/lib/css/bootstrap.min.css}">
+	<script type="text/javascript" th:src="@{/lib/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/lib/js/popper.min.js}"></script>
+	<script type="text/javascript" th:src="@{/lib/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/lib/js/all.min.js}"></script>
+
+	<link rel="stylesheet" type="text/css" th:href="@{/styles/listitem.css}">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  	<!-- <a class="navbar-brand" href="#">Navbar</a> -->
+	  	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    	<span class="navbar-toggler-icon"></span>
+	  	</button>
+
+	  	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    	<ul class="navbar-nav mr-auto">
+	      		<li class="nav-item">
+	        		<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	      		</li>
+	      		<li class="nav-item">
+	        		<a class="nav-link" href="#">List</a>
+	      		</li>
+	      		<li class="nav-item">
+	        		<a class="nav-link" href="#">Inspec</a>
+	      		</li>
+		      	<li class="nav-item dropdown">
+		        	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          		Require
+		        	</a>
+			        <div class="dropdown-menu dropmenu" aria-labelledby="navbarDropdown">
+			          	<a class="dropdown-item" href="#">Supply New</a>
+			          	<a class="dropdown-item" href="#">Return</a>
+			          	<a class="dropdown-item" href="#">Broken</a>
+			        </div>
+		      	</li>
+		      	<li class="nav-item">
+		      		<a class="nav-link" href="#">Import</a>
+		      	</li>
+		      	<li class="nav-item">
+		      		<a class="nav-link" href="#">Handover</a>
+		      	</li>
+		      	<li class="nav-item">
+		      		<a class="nav-link" href="#">Maintenance</a>
+		      	</li>
+		      	<!--<li class="nav-item">
+		      		<a class="nav-link" href="#">Liquidation</a>
+		      	</li> -->
+	    	</ul>
+	  	</div>
+	</nav>
+	<div id="header">
+		<img id="logo" th:src="@{/img/3slogo.png}">
+		<h3 id="hdtext">3S Management Items</h3>
+	</div>
+
+	<div class="container-fluid">
+		<div id="filter">
+			<h4 id="title_page">List Items</h4>
+			<div class="fildiv">
+				<a class="fil" data-toggle="collapse" href="#filter-panel">
+					Filter
+				</a>
+				<a th:href="@{/item/additem}" class="addnew font-weight-bold text-primary">New Item</a>
+			</div>
+			
+			<div id="filter-panel" class="collapse filter-panel">
+	            <div class="panel panel-default">
+	                <div class="panel-body">
+	                    <form class="form-inline" role="form">
+	                        <div class="form-group">
+	                            <label class="filter-col" style="margin-right:0;" for="pref-perpage">Type:</label>
+	                            <select id="type" class="form-control">
+	                                <option value="2">Laptop</option>
+	                                <option value="3">Fan</option>
+	                                <option value="4">Table</option>
+	                                <option value="5">Chair</option>
+	                                <!-- <option value="6">6</option> -->
+	                            </select>                                
+	                        </div> <!-- form group [rows] -->
+	                        <div class="form-group">
+	                            <label class="filter-col" style="margin-right:0;" for="pref-search">Producer:</label>
+	                            <select id="producer" class="form-control">
+	                                <option value="2">Dell</option>
+	                                <option value="3">Asus</option>
+	                                <option value="4">Senko</option>
+	                                <option value="5">Hoa Phat</option>
+	                                <!-- <option value="6">6</option> -->
+	                            </select> 
+	                        </div><!-- form group [search] -->
+	                        <div class="form-group">
+	                            <label class="filter-col" style="margin-right:0;" for="pref-orderby">Branch:</label>
+	                            <select id="branch" class="form-control">
+	                                <option value="2">Ha Noi</option>
+	                                <option value="3">Hue</option>
+	                            </select>                               
+	                        </div> <!-- form group [order by] -->
+	                        <div class="form-group">
+	                            <label class="filter-col" style="margin-right:0;" for="pref-orderby">Floor:</label>
+	                            <select id="floor" class="form-control">
+	                                <option value="2">F1</option>
+	                                <option value="3">F2</option>
+	                                <option value="4">F3</option>
+	                                <option value="5">F6</option>
+	                                <option value="6">F7</option>
+	                                <option value="7">F8</option>
+	                            </select>                               
+	                        </div>
+	                        <div class="form-group">
+	                            <label class="filter-col" style="margin-right:0;" for="pref-orderby">Status:</label>
+	                            <select id="status" class="form-control">
+	                                <option value="2">Free</option>
+	                                <option value="3">Using</option>
+	                                <option value="4">Maintenance</option>
+	                                <option value="5">Liquidation</option>
+	                            </select>                               
+	                        </div>  
+	                        <div class="form-group">    
+	                            <button type="submit" class="btn btn-default filter-col text-success font-weight-bold">
+	                                Search
+	                            </button>  
+	                        </div>
+	                    </form>
+	                </div>
+	            </div>
+	        </div>
+		</div>
+		<table class="table table-bordered">
+			<thead class="thead-light">
+				<tr class="rhead">
+					<th id="thid">ID</th>
+					<th id="thname">Name</th>
+					<th id="thspec">Specification</th>
+					<th id="thstatus">Status</th>
+					<th id="thact">Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="item : ${listItems}">
+					<tr class="rbody">
+						<td>[[${item.ID_Item}]]</td>
+						<td>[[${item.Name_Item}]]</td>
+						<td>[[${item.speci}]]</td>
+						<td>[[${item.Status}]]</td>
+						<td><a th:href="@{'/item/detail/'+${item.ID_Item}}">Detail</a> |
+						 	<a th:href="@{'/item/edit/'+${item.ID_Item}}">Edit</a> |
+						  	<a href="#">Liquidation</a>
+						</td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+		
+		<div th:if="${totalPages > 1}">
+			<div class="row col-sm-10">
+				<div class="col-sm-2">
+					Total Rows: [[${totalItems}]]
+				</div>
+				<div class="ml-2">
+					<a th:if="${currentPage > 1}" th:href="@{'/page/' + 1}">First</a>
+					<span th:unless="${currentPage > 1}">First</span>
+				</div>
+				<div class="mr-4 ml-2">
+					<a th:if="${currentPage > 1}" th:href="@{'/page/' + ${currentPage - 1}}">Previous</a>
+					<span th:unless="${currentPage > 1}">Previous</span>
+				</div>
+				<div class="mr-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class="mr-2">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
+					<span th:unless="${currentPage < totalPages}">Next</span>
+				</div>
+				<div class="mr-2">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
+					<span th:unless="${currentPage < totalPages}">Last</span>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+
+	
+	
+</body>
+</html>
